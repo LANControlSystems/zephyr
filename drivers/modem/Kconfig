@@ -62,6 +62,15 @@ config MODEM_CONTEXT_VERBOSE_DEBUG
 	  Enabling this setting will turn on VERY heavy debugging from the
 	  modem context helper.  Do NOT leave on for production.
 
+if MODEM_CONTEXT_VERBOSE_DEBUG
+
+config MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT
+	bool "Modem context verbose debug output in hex format"
+	help
+	  Prints out the communication with modem in hex-dump format.
+	  
+endif # MODEM_CONTEXT_VERBOSE_DEBUG
+
 config MODEM_IFACE_UART
 	bool "UART-based modem interface"
 	select RING_BUFFER
@@ -151,6 +160,10 @@ config MODEM_SOCKET
 	  To configure this layer for use, create a modem_socket_config
 	  object with your socket data and pass it's reference to
 	  modem_socket_init().
+	  Note that the modem socket uses runtime allocated file descriptors
+	  reserved from the fdtable, for which the max count is set using the
+	  Kconfig option POSIX_MAX_FDS. Make sure to update this value as both
+	  the modem sockets and the POSIX_API, if used, share them.
 
 config MODEM_SOCKET_PACKET_COUNT
 	int "Maximum number of stored packet sizes per socket"

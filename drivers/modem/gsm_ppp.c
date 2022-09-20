@@ -27,7 +27,7 @@ LOG_MODULE_REGISTER(modem_gsm, CONFIG_MODEM_LOG_LEVEL);
 #include <stdio.h>
 
 #define GSM_UART_NODE                   DT_INST_BUS(0)
-#define GSM_CMD_READ_BUF                128
+#define GSM_CMD_READ_BUF                256
 #define GSM_CMD_AT_TIMEOUT              K_SECONDS(2)
 #define GSM_CMD_SETUP_TIMEOUT           K_SECONDS(6)
 /* GSM_CMD_LOCK_TIMEOUT should be longer than GSM_CMD_AT_TIMEOUT & GSM_CMD_SETUP_TIMEOUT,
@@ -383,8 +383,8 @@ MODEM_CMD_DEFINE(on_cmd_atcmdinfo_cereg)
 }
 
 static const struct setup_cmd query_cellinfo_cmds[] = {
-	SETUP_CMD_NOHANDLE("AT+CEREG=2"),
-	SETUP_CMD("AT+CEREG?", "", on_cmd_atcmdinfo_cereg, 5U, ","),
+	SETUP_CMD_NOHANDLE("AT+CREG=2"),
+	{ .send_cmd = "AT+CREG?", MODEM_CMD_ARGS_MAX("", on_cmd_atcmdinfo_cereg, 2U, 5U, ",") },
 	SETUP_CMD_NOHANDLE("AT+COPS=3,2"),
 	SETUP_CMD("AT+COPS?", "", on_cmd_atcmdinfo_cops, 3U, ","),
 };

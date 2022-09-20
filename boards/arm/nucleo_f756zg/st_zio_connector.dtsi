@@ -1,0 +1,110 @@
+/*
+ * Copyright (c) 2022 Firemate
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	st_zio_header: connector {
+        compatible = "st,zio-connector";
+        #gpio-cells = <2>;
+        gpio-map-mask = <0xffffffff 0xffffffc0>;
+        gpio-map-pass-thru = <0 0x3f>;
+        gpio-map = <0  0 &gpioa 3  0>, /* A0 */
+                   <1  0 &gpioc 0  0>, /* A1 */
+                   <2  0 &gpioc 3  0>, /* A2 */
+                   <3  0 &gpiof 3  0>, /* A3 */
+                   <4  0 &gpiof 5  0>, /* A4 */
+                   <5  0 &gpiof 10 0>, /* A5 */
+                   <6  0 &gpiog 9  0>, /* D0 */
+                   <7  0 &gpiog 14 0>, /* D1 */
+                   <8  0 &gpiof 15 0>, /* D2 */
+                   <9  0 &gpioe 13 0>, /* D3 */
+                   <10 0 &gpiof 14 0>, /* D4 */
+                   <11 0 &gpioe 11 0>, /* D5 */
+                   <12 0 &gpioe 9  0>, /* D6 */
+                   <13 0 &gpiof 13 0>, /* D7 */
+                   <14 0 &gpiof 12 0>, /* D8 */
+                   <15 0 &gpiod 15 0>, /* D9 */
+                   <16 0 &gpiod 14 0>, /* D10 */
+                   <17 0 &gpioa 7  0>, /* D11 */
+                   <18 0 &gpioa 6  0>, /* D12 */
+                   <19 0 &gpioa 5  0>, /* D13 */
+                   <20 0 &gpiob 9  0>, /* D14 */
+                   <21 0 &gpiob 8  0>, /* D15 */
+                   <22 0 &gpioc 6  0>, /* D16 */
+                   <23 0 &gpiob 15 0>, /* D17 */
+                   <24 0 &gpiob 13 0>, /* D18 */
+                   <25 0 &gpiob 12 0>, /* D19 */
+                   <26 0 &gpioa 15 0>, /* D20 */
+                   <27 0 &gpioc 7  0>, /* D21 */
+                   <28 0 &gpiob 5  0>, /* D22 */
+                   <29 0 &gpiob 3  0>, /* D23 */
+                   <30 0 &gpioa 4  0>, /* D24 */
+                   <31 0 &gpiob 4  0>, /* D25 */
+                   <32 0 &gpiob 6  0>, /* D26 */
+                   <33 0 &gpiob 2  0>, /* D27 */
+                   <34 0 &gpiod 13 0>, /* D28 */
+                   <35 0 &gpiod 12 0>, /* D29 */
+                   <36 0 &gpiod 11 0>, /* D30 */
+                   <37 0 &gpioe 2  0>, /* D31 */
+                   <38 0 &gpioa 0  0>, /* D32 */
+                   <39 0 &gpiob 0  0>, /* D33 */
+                   <40 0 &gpioe 0  0>, /* D34 */
+                   <41 0 &gpiob 11 0>, /* D35 */
+                   <42 0 &gpiob 10 0>, /* D36 */
+                   <43 0 &gpioe 15 0>, /* D37 */
+                   <44 0 &gpioe 14 0>, /* D38 */
+                   <45 0 &gpioe 12 0>, /* D39 */
+                   <46 0 &gpioe 10 0>, /* D40 */
+                   <47 0 &gpioe 7  0>, /* D41 */
+                   <48 0 &gpioe 8  0>, /* D42 */
+                   <49 0 &gpioc 8  0>, /* D43 */
+                   <50 0 &gpioc 9  0>, /* D44 */
+                   <51 0 &gpioc 10 0>, /* D45 */
+                   <52 0 &gpioc 11 0>, /* D46 */
+                   <53 0 &gpioc 12 0>, /* D47 */
+                   <54 0 &gpiod 2  0>, /* D48 */
+                   <55 0 &gpiog 2  0>, /* D49 */
+                   <56 0 &gpiog 3  0>, /* D50 */
+                   <57 0 &gpiod 7  0>, /* D51 */
+                   <58 0 &gpiod 6  0>, /* D52 */
+                   <59 0 &gpiod 5  0>, /* D53 */
+                   <60 0 &gpiod 4  0>, /* D54 */
+                   <61 0 &gpiod 3  0>, /* D55 */
+                   <62 0 &gpioe 2  0>, /* D56 */
+                   <63 0 &gpioe 4  0>, /* D57 */
+                   <64 0 &gpioe 5  0>, /* D58 */
+                   <65 0 &gpioe 6  0>, /* D59 */
+                   <66 0 &gpioe 3  0>, /* D60 */
+                   <67 0 &gpiof 8  0>, /* D61 */
+                   <68 0 &gpiof 7  0>, /* D62 */
+                   <69 0 &gpiof 9  0>, /* D63 */
+                   <70 0 &gpiog 1  0>, /* D64 */
+                   <71 0 &gpiog 0  0>, /* D65 */
+                   <72 0 &gpiod 1  0>, /* D66 */
+                   <73 0 &gpiod 0  0>, /* D67 */
+                   <74 0 &gpiof 0  0>, /* D68 */
+                   <75 0 &gpiof 1  0>, /* D69 */
+                   <76 0 &gpiof 2  0>, /* D70 */
+                   <77 0 &gpioa 7  0>, /* D71 */
+                   <78 0 &gpiob 1  0>, /* A6 */
+                   <79 0 &gpioc 2  0>, /* A7 */
+                   <80 0 &gpiof 4  0>; /* A8 */
+    };
+};
+
+/* Mappings for the compatibility with Arduino connector */
+arduino_serial: &usart6 {};
+arduino_i2c: &i2c1 {};
+arduino_spi: &spi1 {};
+
+zio_spi_a: &spi1 {};
+zio_spi_b: &spi3 {};
+zio_i2c_a: &i2c1 {};
+zio_i2c_b: &i2c2 {};
+zio_serial_a: &usart6 {};
+zio_serial_b: &usart2 {};
+zio_sdmmc: &sdmmc1 {};
+zio_can: &can1 {};
+zio_qspi: &quadspi {};

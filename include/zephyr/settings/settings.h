@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <zephyr/sys/util.h>
 #include <zephyr/sys/slist.h>
+#include <zephyr/toolchain/common.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -200,7 +201,7 @@ struct settings_handler_static {
 #define SETTINGS_STATIC_HANDLER_DEFINE(_hname, _tree, _get, _set, _commit,   \
 				       _export)				     \
 	const STRUCT_SECTION_ITERABLE(settings_handler_static,		     \
-				      settings_handler_ ## _hname) = {       \
+	        _CONCAT(settings_handler_, _hname)) = {       \
 		.name = _tree,						     \
 		.h_get = _get,						     \
 		.h_set = _set,						     \

@@ -7,7 +7,8 @@
 /dts-v1/;
 #include <st/f7/stm32f756Xg.dtsi>
 #include <st/f7/stm32f756zgtx-pinctrl.dtsi>
-#include "arduino_r3_connector.dtsi"
+#include "st_zio_connector.dtsi"
+//#include "arduino_r3_connector.dtsi"
 
 /*
  * WARNING: The pin PA7 will conflict on selection of SPI_1 and ETH_STM32_HAL.

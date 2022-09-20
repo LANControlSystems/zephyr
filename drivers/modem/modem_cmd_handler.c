@@ -369,8 +369,12 @@ static void cmd_handler_process_rx_buf(struct modem_cmd_handler_data *data)
 		}
 
 #if defined(CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG)
+#if defined(CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT)
 		LOG_HEXDUMP_DBG(data->match_buf, match_len, "RECV");
-#endif
+#else
+		LOG_DBG("MDM RX |%.*s", match_len, data->match_buf);
+#endif /* CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT */
+#endif /* CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG */
 
 		k_sem_take(&data->sem_parse_lock, K_FOREVER);
 
@@ -516,19 +520,27 @@ int modem_cmd_send_ext(struct modem_iface *iface,
 	}
 
 #if defined(CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG)
+#if defined(CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT)
 	LOG_HEXDUMP_DBG(buf, strlen(buf), "SENT DATA");
+#else
+    LOG_DBG("MDM TX |%s", buf);
+#endif /* CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT */
 
 	if (data->eol_len > 0) {
 		if (data->eol[0] != '\r') {
 			/* Print the EOL only if it is not \r, otherwise there
 			 * is just too much printing.
 			 */
+#if defined(CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT)
 			LOG_HEXDUMP_DBG(data->eol, data->eol_len, "SENT EOL");
+#else
+		    LOG_DBG("SENT EOL");
+#endif /* CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG_IN_HEX_FORMAT */
 		}
 	} else {
 		LOG_DBG("EOL not set!!!");
 	}
-#endif
+#endif /* CONFIG_MODEM_CONTEXT_VERBOSE_DEBUG */
 	if (sem) {
 		k_sem_reset(sem);
 	}
